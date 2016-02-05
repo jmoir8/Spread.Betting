@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Providers", "Providers\Providers.csproj", "{416E6184-8663-423C-94F8-F6B32ADFC9B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheduler", "Scheduler\Scheduler.csproj", "{74CCE89E-5BD0-4941-BDCF-7B60262FF27A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{416E6184-8663-423C-94F8-F6B32ADFC9B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{416E6184-8663-423C-94F8-F6B32ADFC9B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{416E6184-8663-423C-94F8-F6B32ADFC9B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74CCE89E-5BD0-4941-BDCF-7B60262FF27A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74CCE89E-5BD0-4941-BDCF-7B60262FF27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74CCE89E-5BD0-4941-BDCF-7B60262FF27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74CCE89E-5BD0-4941-BDCF-7B60262FF27A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
