@@ -5,6 +5,8 @@ using Microsoft.Practices.Unity;
 using Spread.Betting.Services;
 using System.Configuration;
 using Spread.Betting.Services.Jobs;
+using Spread.Betting.Data;
+using Spread.Betting.Providers;
 
 namespace Spread.Betting.Scheduler
 {
@@ -13,7 +15,10 @@ namespace Spread.Betting.Scheduler
         static void Main(string[] args)
         {
             var container = new UnityContainer();
+            container.AddNewExtension<DataModule>();
+            container.AddNewExtension<ProvidersModule>();
             container.AddNewExtension<ServiceModule>();
+            container.AddNewExtension<AnalyticsModule>();
 
             var pickupInterval = int.Parse(ConfigurationManager.AppSettings["PickupInterval"] ?? "5");
 
