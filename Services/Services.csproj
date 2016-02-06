@@ -72,7 +72,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interafces\ILogger.cs" />
-    <Compile Include="Jobs\GetAnalysis.cs" />
     <Compile Include="Jobs\GetQuotes.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

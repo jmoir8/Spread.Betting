@@ -28,16 +28,6 @@ namespace Spread.Betting.Scheduler
                                                          .WithSimpleSchedule(builder => builder.WithIntervalInSeconds(pickupInterval)
                                                                                                .RepeatForever())
                                                          .Build()));
-                    //x.ScheduleQuartzJobAsService(
-                    //     q =>
-                    //     q.WithJob(() => JobBuilder.Create<GetAnalysis>()
-                    //                               .WithIdentity("GetAnalysisProcessor")
-                    //                               .Build())
-                    //      .AddTrigger(() => TriggerBuilder.Create()
-                    //                                      .WithIdentity("GetAnalysisProcessor")
-                    //                                      .WithSimpleSchedule(builder => builder.WithIntervalInSeconds(pickupInterval)
-                    //                                                                            .RepeatForever())
-                    //                                      .Build()));
 
                     x.RunAsLocalSystem()
                         .DependsOnEventLog()
