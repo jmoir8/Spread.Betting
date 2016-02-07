@@ -62,8 +62,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CurrencyPairProvider.cs" />
-    <Compile Include="Interfaces\ICurrencyPairProvider.cs" />
+    <Compile Include="MarketDataProvider.cs" />
+    <Compile Include="Interfaces\IMarketDataProvider.cs" />
     <Compile Include="Interfaces\IFormatProvider.cs" />
     <Compile Include="Interfaces\IHttpProvider.cs" />
     <Compile Include="Interfaces\IYahooFinanceProvider.cs" />

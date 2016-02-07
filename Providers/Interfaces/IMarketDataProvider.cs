@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace Spread.Betting.Providers.Interfaces
 {
-    public interface ICurrencyPairProvider
+    public interface IMarketDataProvider
     {
         List<CurrencyPair> Pairs { get; }
+        List<Market> Market { get; }
     }
 }

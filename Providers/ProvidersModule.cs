@@ -8,7 +8,7 @@ namespace Spread.Betting.Providers
         protected override void Initialize()
         {
             Container.RegisterType<IHttpProvider, HttpProvider>();
-            Container.RegisterType<ICurrencyPairProvider, CurrencyPairProvider>();
+            Container.RegisterType<IMarketDataProvider, MarketDataProvider>();
             Container.RegisterType<IYahooFinanceProvider, YahooFinanceProvider>();
         }
     }

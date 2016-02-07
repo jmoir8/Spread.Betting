@@ -5,18 +5,41 @@ using Spread.Betting.Providers.Interfaces;
 
 namespace Spread.Betting.Providers
 {
-    public class CurrencyPairProvider : ICurrencyPairProvider
+    public class MarketDataProvider : IMarketDataProvider
     {
         private List<CurrencyPair> _pairs;
+        private List<Market> _market;
 
-        public CurrencyPairProvider()
+        public MarketDataProvider()
+        {
+            GetPairs();
+            GetMarket();
+        }
+
+        public List<CurrencyPair> Pairs
+        {
+            get
+            {
+                return _pairs;
+            }
+        }
+
+        public List<Market> Market
+        {
+            get
+            {
+                return _market;
+            }
+        }
+
+        private void GetPairs()
         {
             _pairs = new List<CurrencyPair>();
 
             // Australian Dollar
-            _pairs.Add(new CurrencyPair { Symbol = "AUDCAD"});
-            _pairs.Add(new CurrencyPair { Symbol = "AUDCHF"});
-            _pairs.Add(new CurrencyPair { Symbol = "AUDJPY"});
+            _pairs.Add(new CurrencyPair { Symbol = "AUDCAD" });
+            _pairs.Add(new CurrencyPair { Symbol = "AUDCHF" });
+            _pairs.Add(new CurrencyPair { Symbol = "AUDJPY" });
             _pairs.Add(new CurrencyPair { Symbol = "AUDNZD" });
             _pairs.Add(new CurrencyPair { Symbol = "AUDNZD" });
             //Candadian Dollar
@@ -68,12 +91,17 @@ namespace Spread.Betting.Providers
             _pairs.Add(new CurrencyPair { Symbol = "ZARJPY" });
         }
 
-        public List<CurrencyPair> Pairs
+        private void GetMarket()
         {
-            get
+            _market = new List<Market>();
+            _market.Add(new Market
             {
-                return _pairs;
-            }
+                MarketCenter = "London",
+                TimeZone = "GMT Standard Time",
+                Open = new TimeSpan(8, 0, 0),
+                Closed = new TimeSpan(16, 0, 0)
+            });
+
         }
     }
 }

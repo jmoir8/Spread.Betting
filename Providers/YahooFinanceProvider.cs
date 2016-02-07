@@ -10,10 +10,10 @@ namespace Spread.Betting.Providers
         private const string BASE_URL = "https://query.yahooapis.com/v1/public/yql?q=";
 
         private IHttpProvider _httpProvider;
-        private ICurrencyPairProvider _currencyPairProvider;
+        private IMarketDataProvider _currencyPairProvider;
         private IFormatProvider<Quote> _formatter;
 
-        public YahooFinanceProvider(IHttpProvider httpProvider, ICurrencyPairProvider currencyPairProvider, IFormatProvider<Quote> formatter)
+        public YahooFinanceProvider(IHttpProvider httpProvider, IMarketDataProvider currencyPairProvider, IFormatProvider<Quote> formatter)
         {
             _httpProvider = httpProvider;
             _currencyPairProvider = currencyPairProvider;

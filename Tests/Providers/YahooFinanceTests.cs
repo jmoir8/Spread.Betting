@@ -15,14 +15,14 @@ namespace Spread.Betting.Tests.Providers
     {
         private YahooFinanceProvider _yahooFinance;
         private Mock<IHttpProvider> _httpProvider;
-        private Mock<ICurrencyPairProvider> _currencyPairProvider;
+        private Mock<IMarketDataProvider> _currencyPairProvider;
         private Mock<IFormatProvider<Quote>> _formatter;
 
         [SetUp]
         public void SetUp()
         {
             _httpProvider = new Mock<IHttpProvider>();
-            _currencyPairProvider = new Mock<ICurrencyPairProvider>();
+            _currencyPairProvider = new Mock<IMarketDataProvider>();
             _formatter = new Mock<IFormatProvider<Quote>>();
         }
 
