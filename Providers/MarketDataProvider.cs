@@ -8,7 +8,7 @@ namespace Spread.Betting.Providers
     public class MarketDataProvider : IMarketDataProvider
     {
         private List<CurrencyPair> _pairs;
-        private List<Market> _market;
+        private Market _market;
 
         public MarketDataProvider()
         {
@@ -24,83 +24,87 @@ namespace Spread.Betting.Providers
             }
         }
 
-        public List<Market> Market
+        public Market Market
         {
             get
             {
+                var localDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById(_market.TimeZone));
+                var localTime = new TimeSpan(localDateTime.Hour, localDateTime.Minute, localDateTime.Second);
+                _market.IsOpen = localTime >=_market.Open && localTime <=_market.Closed;
                 return _market;
             }
         }
 
         private void GetPairs()
         {
-            _pairs = new List<CurrencyPair>();
+            _pairs = new List<CurrencyPair>
+            {
+                new CurrencyPair {Symbol = "AUDCAD"},
+                new CurrencyPair {Symbol = "AUDCHF"},
+                new CurrencyPair {Symbol = "AUDJPY"},
+                new CurrencyPair {Symbol = "AUDNZD"},
+                new CurrencyPair {Symbol = "AUDNZD"},
+                new CurrencyPair {Symbol = "CADCHF"},
+                new CurrencyPair {Symbol = "CADJPY"},
+                new CurrencyPair {Symbol = "CHFJPY"},
+                new CurrencyPair {Symbol = "EURAUD"},
+                new CurrencyPair {Symbol = "EURCAD"},
+                new CurrencyPair {Symbol = "EURCHF"},
+                new CurrencyPair {Symbol = "EURDKK"},
+                new CurrencyPair {Symbol = "EURGBP"},
+                new CurrencyPair {Symbol = "EURDKK"},
+                new CurrencyPair {Symbol = "EURGBP"},
+                new CurrencyPair {Symbol = "EURHUF"},
+                new CurrencyPair {Symbol = "EURJPY"},
+                new CurrencyPair {Symbol = "EURNZD"},
+                new CurrencyPair {Symbol = "EURPLN"},
+                new CurrencyPair {Symbol = "EURUSD"},
+                new CurrencyPair {Symbol = "GBPAUD"},
+                new CurrencyPair {Symbol = "GBPCAD"},
+                new CurrencyPair {Symbol = "GBPCHF"},
+                new CurrencyPair {Symbol = "GBPJPY"},
+                new CurrencyPair {Symbol = "GBPNZD"},
+                new CurrencyPair {Symbol = "GBPUSD"},
+                new CurrencyPair {Symbol = "NZDCAD"},
+                new CurrencyPair {Symbol = "NZDCHF"},
+                new CurrencyPair {Symbol = "NZDJPY"},
+                new CurrencyPair {Symbol = "NZDUSD"},
+                new CurrencyPair {Symbol = "USDCAD"},
+                new CurrencyPair {Symbol = "USDCHF"},
+                new CurrencyPair {Symbol = "USDDKK"},
+                new CurrencyPair {Symbol = "USDHKD"},
+                new CurrencyPair {Symbol = "USDHKD"},
+                new CurrencyPair {Symbol = "USDHUF"},
+                new CurrencyPair {Symbol = "USDJPY"},
+                new CurrencyPair {Symbol = "USDNOK"},
+                new CurrencyPair {Symbol = "USDPLN"},
+                new CurrencyPair {Symbol = "USDRON"},
+                new CurrencyPair {Symbol = "USDSEK"},
+                new CurrencyPair {Symbol = "USDSGD"},
+                new CurrencyPair {Symbol = "USDTRY"},
+                new CurrencyPair {Symbol = "USDZAR"},
+                new CurrencyPair {Symbol = "ZARJPY"}
+            };
 
             // Australian Dollar
-            _pairs.Add(new CurrencyPair { Symbol = "AUDCAD" });
-            _pairs.Add(new CurrencyPair { Symbol = "AUDCHF" });
-            _pairs.Add(new CurrencyPair { Symbol = "AUDJPY" });
-            _pairs.Add(new CurrencyPair { Symbol = "AUDNZD" });
-            _pairs.Add(new CurrencyPair { Symbol = "AUDNZD" });
-            //Candadian Dollar
-            _pairs.Add(new CurrencyPair { Symbol = "CADCHF" });
-            _pairs.Add(new CurrencyPair { Symbol = "CADJPY" });
+            // Candadian Dollar
             // Swiss Franc
-            _pairs.Add(new CurrencyPair { Symbol = "CHFJPY" });
-            //Euro
-            _pairs.Add(new CurrencyPair { Symbol = "EURAUD" });
-            _pairs.Add(new CurrencyPair { Symbol = "EURCAD" });
-            _pairs.Add(new CurrencyPair { Symbol = "EURCHF" });
-            _pairs.Add(new CurrencyPair { Symbol = "EURDKK" });
-            _pairs.Add(new CurrencyPair { Symbol = "EURGBP" });
-            _pairs.Add(new CurrencyPair { Symbol = "EURDKK" });
-            _pairs.Add(new CurrencyPair { Symbol = "EURGBP" });
-            _pairs.Add(new CurrencyPair { Symbol = "EURHUF" });
-            _pairs.Add(new CurrencyPair { Symbol = "EURJPY" });
-            _pairs.Add(new CurrencyPair { Symbol = "EURNZD" });
-            _pairs.Add(new CurrencyPair { Symbol = "EURPLN" });
-            _pairs.Add(new CurrencyPair { Symbol = "EURUSD" });
+            // Euro
             // Sterling
-            _pairs.Add(new CurrencyPair { Symbol = "GBPAUD" });
-            _pairs.Add(new CurrencyPair { Symbol = "GBPCAD" });
-            _pairs.Add(new CurrencyPair { Symbol = "GBPCHF" });
-            _pairs.Add(new CurrencyPair { Symbol = "GBPJPY" });
-            _pairs.Add(new CurrencyPair { Symbol = "GBPNZD" });
-            _pairs.Add(new CurrencyPair { Symbol = "GBPUSD" });
             // New Zealand Dollar
-            _pairs.Add(new CurrencyPair { Symbol = "NZDCAD" });
-            _pairs.Add(new CurrencyPair { Symbol = "NZDCHF" });
-            _pairs.Add(new CurrencyPair { Symbol = "NZDJPY" });
-            _pairs.Add(new CurrencyPair { Symbol = "NZDUSD" });
             // US Dollar
-            _pairs.Add(new CurrencyPair { Symbol = "USDCAD" });
-            _pairs.Add(new CurrencyPair { Symbol = "USDCHF" });
-            _pairs.Add(new CurrencyPair { Symbol = "USDDKK" });
-            _pairs.Add(new CurrencyPair { Symbol = "USDHKD" });
-            _pairs.Add(new CurrencyPair { Symbol = "USDHKD" });
-            _pairs.Add(new CurrencyPair { Symbol = "USDHUF" });
-            _pairs.Add(new CurrencyPair { Symbol = "USDJPY" });
-            _pairs.Add(new CurrencyPair { Symbol = "USDNOK" });
-            _pairs.Add(new CurrencyPair { Symbol = "USDPLN" });
-            _pairs.Add(new CurrencyPair { Symbol = "USDRON" });
-            _pairs.Add(new CurrencyPair { Symbol = "USDSEK" });
-            _pairs.Add(new CurrencyPair { Symbol = "USDSGD" });
-            _pairs.Add(new CurrencyPair { Symbol = "USDTRY" });
-            _pairs.Add(new CurrencyPair { Symbol = "USDZAR" });
             // South African Rand
-            _pairs.Add(new CurrencyPair { Symbol = "ZARJPY" });
         }
 
         private void GetMarket()
         {
-            _market = new List<Market>();
-            _market.Add(new Market
+            _market = new Market
             {
                 MarketCenter = "London",
                 TimeZone = "GMT Standard Time",
                 Open = new TimeSpan(8, 0, 0),
                 Closed = new TimeSpan(16, 0, 0)
-            });
+            };
 
         }
     }

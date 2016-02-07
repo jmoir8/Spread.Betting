@@ -6,6 +6,6 @@ namespace Spread.Betting.Providers.Interfaces
     public interface IMarketDataProvider
     {
         List<CurrencyPair> Pairs { get; }
-        List<Market> Market { get; }
+        Market Market { get; }
     }
 }

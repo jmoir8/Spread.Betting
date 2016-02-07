@@ -75,7 +75,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\DateExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\MarketDataProviderTests.cs" />
     <Compile Include="Providers\GetQuoteFormatterTests.cs" />
     <Compile Include="Providers\YahooFinanceTests.cs" />
     <Compile Include="Services\GetQuotesTests.cs" />

@@ -27,12 +27,14 @@ namespace Spread.Betting.Tests.Providers
         }
 
         [Test]
-        public void given_valid_get_quotes_request_process_response()
+        public void given_market_center_is_open_process_response()
         {
             var url = WebUtility.UrlEncode("https://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.xchange where pair in ('AUDCAD,AUDCHF')") + "&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
-            var pairs = new List<CurrencyPair>();
-            pairs.Add(new CurrencyPair { Symbol = "AUDCAD" });
-            pairs.Add(new CurrencyPair { Symbol = "AUDCHF" });
+            var pairs = new List<CurrencyPair>
+            {
+                new CurrencyPair {Symbol = "AUDCAD"},
+                new CurrencyPair {Symbol = "AUDCHF"}
+            };
 
             var response = new Quote
             {
@@ -43,15 +45,29 @@ namespace Spread.Betting.Tests.Providers
             response.Rates.Add(new Rate { CurrencyPair = new CurrencyPair { Symbol = "AUDCAD" } });
             response.Rates.Add(new Rate { CurrencyPair = new CurrencyPair { Symbol = "AUDCHF" } });
 
+            _currencyPairProvider.Setup(x => x.Market).Returns(new Market{IsOpen = true});
             _currencyPairProvider.Setup(x => x.Pairs).Returns(pairs);
             _httpProvider.Setup(x => x.GetAsync(url, _formatter.Object)).Returns(Task.FromResult(response));
 
             _yahooFinance = new YahooFinanceProvider(_httpProvider.Object,
                                                                     _currencyPairProvider.Object,
                                                                     _formatter.Object);
-            var result = _yahooFinance.GetQuotes().Result;
+            var result =_yahooFinance.GetQuotes().Result;
 
             _httpProvider.Verify();
+        }
+
+        [Test]
+        public void given_market_center_closed_open_ignore_response()
+        {
+            _currencyPairProvider.Setup(x => x.Market).Returns(new Market { IsOpen = false });
+
+            _yahooFinance = new YahooFinanceProvider(_httpProvider.Object,
+                                                                    _currencyPairProvider.Object,
+                                                                    _formatter.Object);
+            var result = _yahooFinance.GetQuotes().Result;
+
+            Assert.That(result, Is.Null);
         }
     }
 }

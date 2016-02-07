@@ -8,8 +8,8 @@ namespace Spread.Betting.Services.Jobs
     [DisallowConcurrentExecution]
     public class GetQuotes : IJob
     {
-        private IYahooFinanceProvider _provider;
-        private ILogger _logger;
+        private readonly IYahooFinanceProvider _provider;
+        private readonly ILogger _logger;
 
         public GetQuotes(IYahooFinanceProvider provider, ILogger logger)
         {

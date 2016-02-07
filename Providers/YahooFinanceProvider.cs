@@ -1,4 +1,5 @@
-﻿using Spread.Betting.Model;
+﻿using System.Linq;
+using Spread.Betting.Model;
 using Spread.Betting.Providers.Interfaces;
 using System.Threading.Tasks;
 using System.Net;
@@ -7,31 +8,30 @@ namespace Spread.Betting.Providers
 {
     public class YahooFinanceProvider : IYahooFinanceProvider
     {
-        private const string BASE_URL = "https://query.yahooapis.com/v1/public/yql?q=";
+        private const string BaseUrl = "https://query.yahooapis.com/v1/public/yql?q=";
 
-        private IHttpProvider _httpProvider;
-        private IMarketDataProvider _currencyPairProvider;
-        private IFormatProvider<Quote> _formatter;
+        private readonly IHttpProvider _httpProvider;
+        private readonly IMarketDataProvider _marketDataProvider;
+        private readonly IFormatProvider<Quote> _formatter;
 
-        public YahooFinanceProvider(IHttpProvider httpProvider, IMarketDataProvider currencyPairProvider, IFormatProvider<Quote> formatter)
+        public YahooFinanceProvider(IHttpProvider httpProvider, IMarketDataProvider marketDataProvider, IFormatProvider<Quote> formatter)
         {
             _httpProvider = httpProvider;
-            _currencyPairProvider = currencyPairProvider;
+            _marketDataProvider = marketDataProvider;
             _formatter = formatter;
         }
 
         public async Task<Quote> GetQuotes()
         {
-            var pairs = _currencyPairProvider.Pairs;
-            var query = "select * from yahoo.finance.xchange where pair in ('";
+            if (!_marketDataProvider.Market.IsOpen) return null;
 
-            foreach (var pair in pairs)
-                query += pair.Symbol + ",";
+            var pairs = _marketDataProvider.Pairs;
 
+            var query = pairs.Aggregate("select * from yahoo.finance.xchange where pair in ('", (current, pair) => current + (pair.Symbol + ","));
             query = query.Substring(0, query.Length - 1);
             query += "')";
 
-            var url = BASE_URL + WebUtility.UrlEncode(query) + "&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+            var url = BaseUrl + WebUtility.UrlEncode(query) + "&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
 
             return await _httpProvider.GetAsync(url, _formatter);
         }
