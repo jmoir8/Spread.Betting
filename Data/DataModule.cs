@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.Unity;
+using Spread.Betting.Data.Interfaces;
 
 namespace Spread.Betting.Data
 {
@@ -6,6 +7,8 @@ namespace Spread.Betting.Data
     {
         protected override void Initialize()
         {
+            Container.RegisterType<IDataContext, DataContext>();
+            Container.RegisterType<IDataCommand, DataCommand>();
         }
     }
 }
