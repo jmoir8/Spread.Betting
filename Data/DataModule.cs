@@ -8,7 +8,7 @@ namespace Spread.Betting.Data
         protected override void Initialize()
         {
             Container.RegisterType<IDataContext, DataContext>();
-            Container.RegisterType<IDataCommand, DataCommand>();
+            Container.RegisterType<IDataRepository, DataRepository>();
         }
     }
 }

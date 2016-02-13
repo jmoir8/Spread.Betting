@@ -21,7 +21,7 @@ namespace Spread.Betting.Providers
             _formatter = formatter;
         }
 
-        public async Task<Quote> GetQuotes()
+        public async Task<Quote> GetQuote()
         {
             if (!_marketDataProvider.Market.IsOpen) return null;
 

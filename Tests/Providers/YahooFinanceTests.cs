@@ -52,7 +52,7 @@ namespace Spread.Betting.Tests.Providers
             _yahooFinance = new YahooFinanceProvider(_httpProvider.Object,
                                                                     _currencyPairProvider.Object,
                                                                     _formatter.Object);
-            var result =_yahooFinance.GetQuotes();
+            var result =_yahooFinance.GetQuote();
 
             _httpProvider.Verify();
         }
@@ -65,7 +65,7 @@ namespace Spread.Betting.Tests.Providers
             _yahooFinance = new YahooFinanceProvider(_httpProvider.Object,
                                                                     _currencyPairProvider.Object,
                                                                     _formatter.Object);
-            var result = _yahooFinance.GetQuotes().Result;
+            var result = _yahooFinance.GetQuote().Result;
 
             Assert.That(result, Is.Null);
         }

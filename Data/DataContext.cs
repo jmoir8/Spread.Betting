@@ -9,8 +9,9 @@ namespace Spread.Betting.Data
 
         public DataContext()
         {
-            Client = new MongoClient();
-            Database = Client.GetDatabase("test");
+            if (Client == null)
+                Client = new MongoClient();
+            Database = Client.GetDatabase("SpreadBetting");
         }
 
         public IMongoDatabase Database { get; set; }
